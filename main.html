@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<head>
+	<!-- local js -->
+	<script type="text/javascript" src="first.js"></script>
+	<!-- online js for latex support -->
+	<script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+	<noscript>Sorry, your browser does not support JavaScript!</noscript>
+</head>
+
+<body>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<h2>Particle Info </h2>
+
+	Choose a default:
+	<form>
+		<input type="radio" name="dparticle" id=sel_1 onclick="pSel_e();VtoBeta()"> e<sup>-</sup><br>
+		<input type="radio" name="dparticle" id=sel_1 onclick="pSel_p();VtoBeta()"> P<sup>+</sup><br>
+		<input type="radio" name="dparticle" id=sel_2 onclick="pSel_d();VtoBeta()"> D<sup>+</sup><br>
+		<input type="radio" name="dparticle" id=sel_0 onclick="pSel_o();VtoBeta()" checked> Other
+	</form><br> or input directly:<br> Z: <input type="number" min=1 max=1000 id="Z" value=2 onblur="VtoBeta()" onkeypress="VtoBeta()">	u <br> Q: <input type="number" min=1 id="Q" value=1 onblur="Bstart()" onkeypress="Bstart()"><br>
+
+	<h2> Kilpatrix Criterion </h2>
+	<p>
+		Kp: <input type="number" id="kp" value="1.82" onblur="FtoE();Bstart()" onkeypress=" FtoE();Bstart()"> Microwave frequency:
+		<input type=number id=mwfreq value=75.5 min=0 max=500 onblur="FtoE();Bstart()" onkeypress=" FtoE();Bstart()"> MHz
+		<br> Es,max: <input type=number id=es value=18.85 min=0 max=10000 onblur="EtoF();Bstart()" onkeypress="EtoF();Bstart()">		MV/m<br>
+	</p>
+
+	<h2> Parameters at the RFQ entrance: </h2><br>
+	<p>
+		E_begin: <input type="number" id="E_begin" value="0.1" onclick="VtoBeta()" onblur="VtoBeta()" onkeypress="VtoBeta()"> MV/Q
+		<br> &gamma;begin: <input type="number" id="gamma_begin" value=""> <br> &beta;begin:
+		<input type="number" id="beta_begin" value=""> <br>
+	</p>
+
+	<h2> Parameters at the end of Shaper: </h2><br>
+	<p>
+		E_SH: <input type="number" id="E_SH" value="0.11" onclick="VtoBeta()" onblur="VtoBeta()" onkeypress="VtoBeta()"> MV/Q <br>
+		<br> &gamma;begin: <input type="number" id="gamma_SH" value=""> <br> &beta;begin:
+		<input type="number" id="beta_SH" value=""> <br>
+	</p>
+
+	<h2> Parameters at the end of Gentle Bunch: </h2><br>
+	<p>
+		L: <input type="number" id="L" value=""> cm <br> &lambda;:
+		<input type="number" id="lambda" value=""> m <br> k(wave number):<input type="number" id="waveNumber" value=""> <br>
+
+		<b>B</b>: <input type="number" min=0 max=10 id="B" value="8.5" onblur="Bstart()" onkeypress="Bstart()"><br> r0:
+		<input type="number" id="r0"> cm <br>
+
+		<b>V0</b>: <input type="number" id="V0" value="" onblur="V0start()" onkeypress="V0start()"> kV <br> phi_s:
+		<input type="number" id="phs_s" value="-60" onblur="" onkeypress=""><br> psi: <input type="number" id="psi" value="180"><br>
+
+		<b>m</b>: <input type="number" id="modulation" value="1.4" onblur="Bstart()" onkeypress="Bstart()"><br> a:
+		<input type="number" id="aperture" value="">cm<br> A: <input type="number" id="A" value=""><br> X: <input type="number"
+			id="X" value=""><br> E0: <input type="number" id="E0" value=""> MV/m<br> dW: <input type="number" id="dW" value=""> MeV<br>
+
+		<b>E_GB</b>: <input type="number" id="E_GB" value="0.3" onblur="VtoBeta()" onkeypress="VtoBeta()"> MV/Q <br> &gamma;_GB::
+		<input type="number" id="gamma_GB" value=""> <br> &beta;_GB:: <input type="number" id="beta_GB" value=""> <br>
+
+	</p>
+
+
+	<h2> Parameters at the end of RFQ: </h2>
+	<p>
+		E_RFQ:: <input type="number" id="E_RFQ" value="2.5" , onclick="VtoBeta()" onblur="VtoBeta()" onkeypress="VtoBeta()"> MV/Q
+		<br> &gamma;_RFQ:: <input type="number" id="gamma_RFQ" value=""> <br> &beta;_RFQ:: <input type="number" id="beta_RFQ" value="">		<br>
+	</p>
+
+
+	<details>
+		<summary> Reference </summary>
+		<p>Note: calculation from frequence to electric field needs more precise method. You can always check by insert values in
+			the Electric field directly </p>
+		<p>
+			Kilpatrix Criterion:<br>
+			<div lang="latex">
+				f = 1.6{E^2}{e^{ - 8.5/E}}
+			</div>
+
+			Focusing efficiency:<br>
+			<div lang="latex">
+				B = \frac{{qV}}{{M{c^2}}}\frac{{{\lambda ^2}}}{{r_0^2}}
+			</div>
+
+			The vane voltage V and the radius at the quadrupole symetric point, r0,<br>
+			<div lang="latex">
+				{r_0} = \frac{{q{\lambda ^2}{E_p}}}{{M{c^2}B}}
+			</div>
+
+			<div lang="latex">
+				V = \frac{{q{\lambda ^2}E_p^2}}{{M{c^2}B}}
+			</div>
+
+			Ep is the surface field at the pole tip, Ep=V/r0. Notice that the maxium field occurs at where the vanes have minimum seperation,
+			Es=kEp and k=1.36.<br>
+
+			<div lang="latex">
+				Es = \kappa \frac{V}{{{r_0}}}
+			</div>
+
+			Acceleration efficiency:<br>
+
+			<div lang="latex">
+				A = \frac{{{m^2} - 1}}{{{m^2}{I_0}(ka) + {I_0}(kma)}}
+			</div>
+
+			Focusing efficiency:<br>
+
+			<div lang="latex">
+				X = \frac{{{I_0}(ka) + {I_0}(kma)}}{{{m^2}{I_0}(ka) + {I_0}(kma)}} = 1 - A{I_0}(ka)
+			</div>
+
+			<div lang="latex">
+				k = \frac{{2\pi }}{{\beta \lambda }}
+			</div>
+
+			<div lang="latex">
+				X = \frac{{{a^2}}}{{r_0^2}}
+			</div>
+
+			RF defocus force:<br>
+			<div lang="latex">
+				{\Delta _{RF}} = \frac{{{\pi ^2}qVA Sin \phi }}{{2M{c^2}{\beta ^2}}}
+			</div>
+
+
+
+
+
+
+
+		</p>
+	</details>
+
+</body>
